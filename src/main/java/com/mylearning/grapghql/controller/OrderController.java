@@ -41,9 +41,4 @@ public class OrderController {
     public List<OrderResponseDto> getAllOrders() {
         return orderService.getAllOrders();
     }
-
-
-
-
-
 }
