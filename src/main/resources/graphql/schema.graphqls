@@ -1,0 +1,72 @@
+type Order{
+    id: ID!
+    orderDetails: String!
+    orderStatus: String
+    orderPrice: Float!
+    orderDate: String!
+    orderTime: String
+    orderAddress: String
+}
+
+type User{
+    id: ID!
+    name: String!
+    email: String!
+    phone: String!
+    address: String!
+    password: String!
+    orders: [Order]
+}
+
+input UserInputRequestDto{
+    name: String!
+    email: String!
+    phone: String!
+    address: String!
+    password: String!
+}
+
+input OrderInputRequestDto{
+    orderDetails: String!
+    orderStatus: String
+    orderPrice: Float!
+    orderDate: String!
+    orderTime: String
+    orderAddress: String
+}
+
+type OrderResponseDto{
+    id: ID!
+    orderDetails: String!
+    orderStatus: String
+    orderPrice: Float!
+    orderDate: String!
+    orderTime: String
+    orderAddress: String
+}
+
+type UserResponseDto{
+    id: ID!
+    name: String!
+    email: String!
+    phone: String!
+    address: String!
+}
+
+type Query{
+    getAllOrders: [Order]
+    getOrderById(orderId: ID!): OrderResponseDto
+    getAllUsers: [User]
+    getUserById(userId: ID!): User
+    getUserByEmail(email: String!): User
+
+}
+
+type Mutation{
+    saveOrder(orderInputRequestDto: OrderInputRequestDto): OrderResponseDto
+    updateOrder(orderInputRequestDto: OrderInputRequestDto): OrderResponseDto
+    deleteOrder(orderId: ID!): OrderResponseDto
+    saveUser(input: UserInputRequestDto): UserResponseDto
+    updateUser(input: UserInputRequestDto): UserResponseDto
+    deleteUser(userId: ID!): UserResponseDto
+}

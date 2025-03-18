@@ -9,5 +9,4 @@ public class GraphQlUserOrderAppApplication {
     public static void main(String[] args) {
         SpringApplication.run(GraphQlUserOrderAppApplication.class, args);
     }
-
 }

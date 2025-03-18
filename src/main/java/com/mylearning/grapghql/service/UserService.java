@@ -38,4 +38,7 @@ public class UserService {
         userRepository.delete(user);
         return mapper.map(user, UserResponseDto.class);
     }
+    public UserResponseDto getUserByEmail(String email) {
+        return mapper.map(userRepository.findByEmail(email).orElseThrow(ExceptionHelper::throwResourceNotFoundException), UserResponseDto.class);
+    }
 }
