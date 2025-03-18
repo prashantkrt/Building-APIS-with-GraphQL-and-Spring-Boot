@@ -1,5 +1,6 @@
 package com.mylearning.grapghql.service;
 
+import com.mylearning.grapghql.Helper.ExceptionHelper;
 import com.mylearning.grapghql.Repository.OrderRepository;
 import com.mylearning.grapghql.dto.OrderInputRequestDto;
 import com.mylearning.grapghql.dto.OrderResponseDto;
@@ -47,7 +48,7 @@ public class OrderService {
     }
 
     public OrderResponseDto getOrderById(Integer orderId) {
-        Order order = orderRepository.findById(orderId).orElseThrow(() -> new RuntimeException("Order not found"));
+        Order order = orderRepository.findById(orderId).orElseThrow(ExceptionHelper::throwResourceNotFoundException);
         return mapper.map(order, OrderResponseDto.class);
     }
 
@@ -58,7 +59,7 @@ public class OrderService {
     }
 
     public OrderResponseDto deleteOrder(Integer orderId) {
-        Order order = orderRepository.findById(orderId).orElseThrow(() -> new RuntimeException("Order not found"));
+        Order order = orderRepository.findById(orderId).orElseThrow(ExceptionHelper::throwResourceNotFoundException);
         orderRepository.delete(order);
         return mapper.map(order, OrderResponseDto.class);
     }

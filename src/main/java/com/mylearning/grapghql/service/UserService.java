@@ -1,5 +1,6 @@
 package com.mylearning.grapghql.service;
 
+import com.mylearning.grapghql.Helper.ExceptionHelper;
 import com.mylearning.grapghql.Repository.UserRepository;
 import com.mylearning.grapghql.dto.UserResponseDto;
 import com.mylearning.grapghql.entity.User;
@@ -29,11 +30,11 @@ public class UserService {
     }
 
     public UserResponseDto getUserById(Integer userId) {
-        return mapper.map(userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found")), UserResponseDto.class);
+        return mapper.map(userRepository.findById(userId).orElseThrow(ExceptionHelper::throwResourceNotFoundException), UserResponseDto.class);
     }
 
     public UserResponseDto deleteUser(Integer userId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+        User user = userRepository.findById(userId).orElseThrow(ExceptionHelper::throwResourceNotFoundException);
         userRepository.delete(user);
         return mapper.map(user, UserResponseDto.class);
     }
